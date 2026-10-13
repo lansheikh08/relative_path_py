@@ -1,0 +1,14 @@
+[project]
+name = "relative-path-py"
+version = "0.1.0"
+description = "Computes shortest relative path between directories, normalising segments and returning absolute path for different roots."
+requires-python = ">=3.10"
+dependencies = []
+readme = "README.md"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
