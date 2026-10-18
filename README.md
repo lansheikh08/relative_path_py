@@ -26,3 +26,10 @@ The trade-off: the result type is a string either way, so a cross-root result is
 The function does not resolve symlinks. If `source` is a symlink to `target`'s parent, the result reflects the literal path you passed, not the filesystem truth. Call `os.path.realpath` on both arguments first if you need symlink-aware behaviour; doing it inside the library would make the result depend on filesystem state at call time and break reproducibility.
 
 On Windows, a drive-letter path and a UNC path (`\\\server\share\...`) are treated as different roots; the absolute target is returned. Two paths on the same drive, even with different casing, share a root.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
